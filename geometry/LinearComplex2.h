@@ -6,6 +6,7 @@
 
 #include "config.h"
 #include "WmlPolygon2.h"
+#include "rmsdebug.h"
 
 namespace rms {
 
@@ -182,7 +183,8 @@ inline const std::vector< Wml::Vector2<Real> > & LinearComplex2<Real>::Vertices(
 
 
 template<class Real>
-inline unsigned int LinearComplex2<Real>::AppendEdge( typename const LinearComplex2<Real>::LCEdge & edge )
+//inline unsigned int LinearComplex2<Real>::AppendEdge( typename const LinearComplex2<Real>::LCEdge & edge )
+inline unsigned int LinearComplex2<Real>::AppendEdge(const LinearComplex2<Real>::LCEdge & edge )
 {
 	size_t nEdge = m_vEdges.size();
 	m_vEdges.push_back( edge );
@@ -196,7 +198,8 @@ inline unsigned int LinearComplex2<Real>::EdgeCount()
 }
 
 template<class Real>
-inline typename const LinearComplex2<Real>::LCEdge & LinearComplex2<Real>::Edge( unsigned int nEdge )
+//inline typename  LinearComplex2<Real>::LCEdge & LinearComplex2<Real>::Edge( unsigned int nEdge )
+inline const typename LinearComplex2<Real>::LCEdge & LinearComplex2<Real>::Edge( unsigned int nEdge )
 {
 	return m_vEdges[nEdge];
 }

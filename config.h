@@ -19,6 +19,14 @@
 #endif
 
 
+
+#ifndef WIN32
+#include <cmath>
+static bool _finite(double val){return std::isfinite(val);}
+#endif
+
+
+
 // defined in config.cpp
 void lgBreakToDebugger();
 int lgAssertReport(const char * filename, int line, const char * message);

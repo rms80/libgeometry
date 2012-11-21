@@ -62,8 +62,10 @@ MeshSubdivider::EdgeVert & MeshSubdivider::GetEdgeVert( IMesh::VertexID e1, IMes
 
 	EdgeVert eSearch; eSearch.ve2 = e2;
 	EdgeVertList::iterator found( vList.find(eSearch) );
+	
 	if ( found != vList.end() ) {
-		return *found;
+	  return const_cast<MeshSubdivider::EdgeVert&>(*found);
+		//return *found;
 	}
 
 	Wml::Vector3f v1, v2, n1, n2;
@@ -76,7 +78,9 @@ MeshSubdivider::EdgeVert & MeshSubdivider::GetEdgeVert( IMesh::VertexID e1, IMes
 	eSearch.vNew = m_pMesh->AppendVertex( vEdge, &vNorm );
 	m_vNewVerts.push_back( eSearch.vNew );
 	EdgeVertList::iterator eNew = vList.insert( eSearch ).first;
-	return *eNew;
+	
+	 return const_cast<MeshSubdivider::EdgeVert&>(*eNew);
+	//return *eNew;
 }
 
 
@@ -106,8 +110,12 @@ bool MeshSubdivider::DoIterativeSubdivide( VFTriangleMesh & mesh, IterationCallb
 
 		Wml::Vector3f vVerts[2], vNorms[2];
 
-		while ( m_initCurEdge != mesh.EndEdges() ) {
-
+    assert(1==0);
+    // not yet ported to Linux-compiler
+		//while (m_initCurEdge != mesh.EndEdges() ) 
+		while(false)
+		{
+    
 			// allow caller to halt iteration
 			callbackState = callback.CheckIteration();
 			if ( callbackState != IterationCallback::Continue )
@@ -170,8 +178,8 @@ bool MeshSubdivider::DoIterativeSubdivide( VFTriangleMesh & mesh, IterationCallb
 				Wml::Vector2f vUVs[2];
 				bool bOK1 = mesh.GetUV(vEdgeV[0], 0, vUVs[0]);
 				bool bOK2 = mesh.GetUV(vEdgeV[1], 0, vUVs[1]);
-				if ( ! bOK1 || ! bOK2 )
-					DebugBreak();
+				//if ( ! bOK1 || ! bOK2 )
+				//	DebugBreak();
 				Wml::Vector2f vUV( 0.5f * (vUVs[0] + vUVs[1]) );
 				mesh.SetUV( vNew, 0, vUV );
 			}

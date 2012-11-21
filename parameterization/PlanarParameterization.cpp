@@ -1139,7 +1139,7 @@ void PlanarParameterization::ComputeBoundaryInfo( BoundaryInfo & info )
 			rms::IMesh::VertexID vNext = rms::IMesh::InvalidID;
 			cure = edges.begin();
 			while ( cure != ende && vNext == rms::IMesh::InvalidID ) {
-				Edge & edge = *cure;
+				Edge & edge = const_cast<Edge&>(*cure);
 				if ( edge.v1 == vCur )
 					vNext = edge.v2;
 				else if ( edge.v2 == vCur )
@@ -1398,7 +1398,7 @@ void PlanarParameterization::MakeOneRingNeighbourSet( rms::IMesh::VertexID vID, 
 	// compute angle and distance for each triangle
 	float fAngleSum = 0.0f;
 	Wml::Vector3f vLast(vFirst), vLastEdge(vFirstEdge), vCur;
-	Wml::Vector3f ;
+	// Wml::Vector3f ;
 	for ( unsigned int i = 1; i < nCount+1; ++i ) {
 		m_pMesh->GetVertex( vOneRing[i%nCount], vCur );
 

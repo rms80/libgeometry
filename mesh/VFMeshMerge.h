@@ -7,6 +7,7 @@
 #include "config.h"
 #include "VFTriangleMesh.h"
 #include "VFMeshMask.h"
+#include "rmsprofile.h"
 
 
 namespace rms {

@@ -7,7 +7,7 @@
 #include "config.h"
 #include "IGeometry.h"
 #include <Wm4Vector3.h>
-
+#include <limits>
 namespace rms {
 
 // TODO:
@@ -132,12 +132,6 @@ void DijkstraFrontProp<T>::AppendStartValues( const std::vector<T> & vStartValue
 }
 
 
-
-
-
-
-
-
 template <class T>
 void DijkstraFrontProp<T>::UpdateQueue(T vID)
 {
@@ -164,7 +158,8 @@ void DijkstraFrontProp<T>::UpdateQueue(T vID)
 
 		if ( fDist < vNbr.fMinDist ) {
 			VertWrapper wrapv(&vNbr);
-			DJQueue::iterator found( m_vQueue.find( wrapv ) );
+
+			typename DJQueue::iterator found( m_vQueue.find( wrapv ) );
 			if ( found != m_vQueue.end() )
 				m_vQueue.erase(found);
 			vNbr.fMinDist = fDist;
@@ -195,7 +190,7 @@ void DijkstraFrontProp<T>::FindAllDistances()
 			m_vInfo[vID].bFrozen = false;
 		}
 	} else {
-		std::set<T>::iterator curv(m_filterSet.begin()), endv(m_filterSet.end());
+		typename std::set<T>::iterator curv(m_filterSet.begin()), endv(m_filterSet.end());
 		while ( curv != endv ) {
 			T vID = *curv++;
 			m_vInfo[vID].vID = vID;

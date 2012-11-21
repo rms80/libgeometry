@@ -11,7 +11,7 @@
 #include "config.h"
 #include <set>
 #include "MemoryPool.h"
-
+#include <cassert>
 
 
 
@@ -26,7 +26,7 @@ namespace rms {
 template<class T>
 struct SparseBucketEntry {
 	unsigned int i;
-	T val;
+	mutable T val;
 	inline bool operator<( const SparseBucketEntry & e2 ) const
 		{ return i < e2.i; }
 	inline bool operator==( const SparseBucketEntry & e2 ) const
@@ -52,45 +52,61 @@ public:
 
 	inline bool set( Index i, const T & v ) { 
 		EntryType e; e.i = i; e.val = v; 
-		std::pair< std::set<EntryType>::iterator, bool > pr = m_vData.insert(e);
-		if ( ! pr.second )
-			(*pr.first).val = v;
+		std::pair<typename std::set<EntryType>::iterator, bool > pr = m_vData.insert(e);
+		//if ( ! pr.second )
+		//	(*pr.first).val = v;
 		return pr.second;
 	}
 
 	inline bool remove( Index i ) {
 		EntryType e; e.i = i; 
-		std::pair< std::set<EntryType>::iterator, bool > pr = m_vData.erase(e); 
+		std::pair<typename std::set<EntryType>::iterator, bool > pr = m_vData.erase(e); 
 		return pr.second;
 	}
 		
 
 	inline bool has( Index i ) const {
 		EntryType e; e.i = i;
-		std::set<EntryType>::const_iterator cur( m_vData.find(e) );
-		return (cur != m_vData.end());
+		
+		return  m_vData.find(e) != m_vData.end();
+		
+		// std::set<EntryType>::const_iterator cur( m_vData.find(e) );
+		// return (cur != m_vData.end());
 	}
 
+  // todo: what happens if there is no such element?
 	inline T & get( Index i ) { 
 		EntryType e; e.i = i;
-		std::set<EntryType>::iterator cur( m_vData.find(e) );
-		return (*cur).val;
+		
+		assert(1==0); // "not yet moved to Linux"
+		
+		// T foo = m_vData.find(e)->val;
+		
+		// return foo;
+		
+		// std::set<EntryType>::iterator cur( m_vData.find(e) );
+		// return (*cur).val;
 	}
+	
 	inline const T & get( Index i ) const { 
 		EntryType e; e.i = i;
-		std::set<EntryType>::const_iterator cur( m_vData.find(e) );
-		return (*cur).val;
+		return m_vData.find(e)->val;
+		
+		// std::set<EntryType>::const_iterator cur( m_vData.find(e) );
+		// return (*cur).val;
 	}
 
 	inline T & operator[]( Index i ) {
 		EntryType e; e.i = i;
-		std::set<EntryType>::iterator cur( m_vData.find(e) );
-		return (*cur).val;
+		return m_vData.find(e).val;
+//		std::set<EntryType>::iterator cur( m_vData.find(e) );
+//		return (*cur).val;
 	}
 	inline const T & operator[]( Index i ) const {
 		EntryType e; e.i = i;
-		std::set<EntryType>::iterator cur( m_vData.find(e) );
-		return (*cur).val;
+		return m_vData.find(e).val;
+		//std::set<EntryType>::iterator cur( m_vData.find(e) );
+		//return (*cur).val;
 	}
 
 	typedef typename std::set<EntryType>::iterator iterator;

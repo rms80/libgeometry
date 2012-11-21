@@ -131,7 +131,7 @@ public:
 	protected:
 		PolygonConstItr cur;
 
-		id_iterator( PolygonConstItr & val ) { cur = val; }
+		id_iterator(const PolygonConstItr & val ) { cur = val; }
 		friend class MeshPolygons;
 	};
 

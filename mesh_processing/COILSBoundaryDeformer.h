@@ -76,11 +76,11 @@ public:
 		IMesh::VertexID vNbrIDs[2];
 
 		rms::Frame3f vInitial;
-		rms::Frame3f vSet;
+		mutable rms::Frame3f vSet;
 
 		float fNbrEdgeLength;
 
-		std::vector<Wml::Triangle3f> vExteriorTris;
+		mutable std::vector<Wml::Triangle3f> vExteriorTris;
 
 		bool operator<(const BoundaryVert & v2) const {
 			return vID < v2.vID;

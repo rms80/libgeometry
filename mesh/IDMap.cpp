@@ -9,6 +9,5 @@ using namespace rms;
 namespace rms
 {
 template class IDMap<IMesh::VertexID>;
-template class IDMap<IMesh::VertexID>;
 }
 

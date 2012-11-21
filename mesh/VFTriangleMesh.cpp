@@ -1392,6 +1392,8 @@ bool VFTriangleMesh::ReadOBJ( const char * pFilename, std::string & errString )
 	std::vector<Wml::Vector3f> vNormals;
 	std::vector<Wml::Vector2f> vUVs;
 
+
+	int id;
 	unsigned int ivec[3];
 	while(in){
 		ostrstream s;
@@ -1407,7 +1409,8 @@ bool VFTriangleMesh::ReadOBJ( const char * pFilename, std::string & errString )
 			switch(command.c_str()[1]){
 			case '\0':  // vertex
 				in >> fvec[2];
-				AppendVertex(fvec);
+				id = AppendVertex(fvec);
+				// printf("new vertex id: %i (%zu normals)\n",id,vNormals.size());
 				break;
 			case 'n': // vertex normal
 				bHasNormals = true;
@@ -1473,6 +1476,9 @@ bool VFTriangleMesh::ReadOBJ( const char * pFilename, std::string & errString )
 			in.getline(linebuf, 1023, '\n');
 		}
 	}
+
+
+	printf("read %zu vertices, %zu normals and %zu triangles \n",GetVertexCount(),vNormals.size(), GetTriangleCount());
 
 	// if we have no triangles, assume 1-1 ordered matches
 	unsigned int nVerts = GetVertexCount();

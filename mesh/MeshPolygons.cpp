@@ -133,7 +133,7 @@ bool MeshPolygons::AppendTriangle( PolygonID sID, IMesh::TriangleID tID )
 	if (found == m_vPolygons.end() )
 		return false;
 
-	Polygon & tris = *found;
+	Polygon & tris = const_cast<Polygon&>(*found);
 	tris.vTris.push_back(tID);
 	m_PolygonMap.insert(std::pair<IMesh::TriangleID,PolygonID>(tID,sID));
 	//m_PolygonMap[tID] = sID;
@@ -152,7 +152,7 @@ bool MeshPolygons::SetBoundary( PolygonID sID, const std::vector<IMesh::VertexID
 	if (found == m_vPolygons.end() )
 		return false;
 
-	Polygon & poly = *found;
+	Polygon & poly = const_cast<Polygon&>(*found);
 	poly.vBoundary = vBoundary;
 	if ( pBoundaryUV && pBoundaryUV->size() == vBoundary.size() )
 		poly.vBoundaryUV = *pBoundaryUV;
@@ -243,7 +243,7 @@ void MeshPolygons::Rewrite( const VertexMap & VMap, const TriangleMap & TMap )
 
 	std::set<Polygon>::iterator curt(m_vPolygons.begin()), endt(m_vPolygons.end());
 	while ( curt != endt ) {
-		Polygon & t = *curt++;
+		Polygon & t = const_cast<Polygon&>(*curt++);
 		size_t nTris = t.vTris.size();
 		for ( unsigned int k = 0 ; k < nTris; ++k ) {
 			IMesh::TriangleID tNew = TMap.GetNew( t.vTris[k] );
@@ -264,7 +264,7 @@ void MeshPolygons::RewriteBoundaries( const VertexMap & VMap )
 {
 	std::set<Polygon>::iterator curt(m_vPolygons.begin()), endt(m_vPolygons.end());
 	while ( curt != endt ) {
-		Polygon & t = *curt++;
+		Polygon & t = const_cast<Polygon&>(*curt++);
 		size_t nVerts = t.vBoundary.size();
 		for ( unsigned int k = 0; k < nVerts; ++k ) {
 			IMesh::VertexID vNew = VMap.GetNew(t.vBoundary[k]);
@@ -278,7 +278,7 @@ void MeshPolygons::RewriteUVs( unsigned int nShift )
 {
 	std::set<Polygon>::iterator curt(m_vPolygons.begin()), endt(m_vPolygons.end());
 	while ( curt != endt ) {
-		Polygon & t = *curt++;
+		Polygon & t = const_cast<Polygon&>(*curt++);
 		size_t nVerts = t.vBoundaryUV.size();
 		for ( unsigned int k = 0; k < nVerts; ++k ) 
 			t.vBoundaryUV[k] += nShift;
@@ -334,9 +334,11 @@ const std::vector<unsigned int> & MeshPolygons::GetBoundaryUV( PolygonID sID ) c
 
 void MeshPolygons::ClearUVs()
 {
+
 	std::set<Polygon>::iterator cur(m_vPolygons.begin()), end(m_vPolygons.end());
 	while ( cur != end ) {
-		(*cur++).vBoundaryUV.clear();
+    Polygon & t = const_cast<Polygon&>(*cur++);	
+		t.vBoundaryUV.clear();
 	}
 }
 
@@ -366,7 +368,7 @@ void MeshPolygons::SanityCheck(VFTriangleMesh & mesh)
 {
 	std::set<Polygon>::iterator curt(m_vPolygons.begin()), endt(m_vPolygons.end());
 	while ( curt != endt ) {
-		Polygon & t = *curt++;
+		Polygon & t = const_cast<Polygon&>(*curt++);
 
 		for ( unsigned int k = 0; k < t.vTris.size(); ++k )
 			if ( ! mesh.IsTriangle( t.vTris[k] ) )

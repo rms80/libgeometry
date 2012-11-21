@@ -99,7 +99,7 @@ public:
 	protected:
 		SegmentConstItr cur;
 
-		id_iterator( SegmentConstItr & val ) { cur = val; }
+		id_iterator(const SegmentConstItr & val ) { cur = val; }
 		friend class Segmentation;
 	};
 
@@ -116,7 +116,7 @@ Segmentation::SegmentID Segmentation::AppendSegment(const T & vlist)
 {
 	SegmentID sID = AppendSegment();
 	Segment * pSeg = FindSegment(sID);
-	T::const_iterator curt(vlist.begin()), endt(vlist.end());
+	typename T::const_iterator curt(vlist.begin()), endt(vlist.end());
 	while ( curt != endt ) {
 		IMesh::TriangleID tID = *curt++;
 		pSeg->vTris.push_back(tID);

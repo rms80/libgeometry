@@ -33,7 +33,7 @@ ExtPlane3<Real>::ExtPlane3( const Wml::Vector3<Real> & vPoint1,
 template<class Real>
 Wml::Vector3<Real> ExtPlane3<Real>::ProjectPointToPlane( const Wml::Vector3<Real> & vPoint ) const 
 {
-	return vPoint - DistanceTo(vPoint) * this->Normal;
+	return vPoint - Wml::Plane3<Real>::DistanceTo(vPoint) * this->Normal;
 }
 
 template<class Real>

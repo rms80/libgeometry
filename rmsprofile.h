@@ -2,6 +2,8 @@
 // Distributed under the Boost Software License, Version 1.0.
 // (See copy at http://www.boost.org/LICENSE_1_0.txt)
 
+#ifndef RMS_PROFILE_H
+#define RMS_PROFILE_H
 
 #ifdef _WIN32
 
@@ -58,5 +60,20 @@ static void _RMSTUNE_winprint(double timeval, char * str)
 #else
 
 // [TODO] portable version
+
+
+static void _RMSTUNE_start(int i){};
+static void _RMSTUNE_end(int i){};
+static void _RMSTUNE_accum_init(int i){};
+static void _RMSTUNE_accum(int i){};
+static double _RMSTUNE_time(int i){return -1;}
+static double _RMSTUNE_accum_time(int i){return -1;}
+
+
+static void DebugBreak(){};
+
+
+
+#endif
 
 #endif

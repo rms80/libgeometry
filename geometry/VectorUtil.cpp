@@ -615,6 +615,7 @@ bool rms::IsObtuse( const Wml::Vector3<Real> & v1, const Wml::Vector3<Real> & v2
 
 
 
+
 namespace rms
 {
 template void ToGLMatrix( const Matrix3<float> & matrix, float glMatrix[16] );
@@ -631,9 +632,16 @@ template void ComputePerpVectors( const Vector3<double> & vIn, Vector3<double> &
 
 template void ComputePerpVectors( const Wml::Vector3<float> & vNormal,  const Wml::Vector3<float> & vEstX, Wml::Vector3<float> & vOut1, Wml::Vector3<float> & vOut2, bool bInputIsNormalized );
 template void ComputePerpVectors( const Wml::Vector3<double> & vNormal,  const Wml::Vector3<double> & vEstX, Wml::Vector3<double> & vOut1, Wml::Vector3<double> & vOut2, bool bInputIsNormalized );
+}
+
+
+#ifdef WIN_32 
+
+namespace rms{
 
 template Wml::Vector3<float> rms::Center( const Wml::AxisAlignedBox3<float> & box );
 template Wml::Vector3<double> rms::Center( const Wml::AxisAlignedBox3<double> & box );
+
 
 template Wml::Vector2<float> rms::Center( const Wml::AxisAlignedBox2<float> & box );
 template Wml::Vector2<double> rms::Center( const Wml::AxisAlignedBox2<double> & box );
@@ -687,7 +695,77 @@ template double rms::VectorAngle( const Wml::Vector3<double> & v1, const Wml::Ve
 template float rms::VectorCot( const Wml::Vector3<float> & v1, const Wml::Vector3<float> & v2 );
 template double rms::VectorCot( const Wml::Vector3<double> & v1, const Wml::Vector3<double> & v2 );
 
+}
+#else
 
+// linux definition
+
+namespace rms{
+
+template Wml::Vector3<float> Center( const Wml::AxisAlignedBox3<float> & box );
+template Wml::Vector3<double> Center( const Wml::AxisAlignedBox3<double> & box );
+
+
+template Wml::Vector2<float> Center( const Wml::AxisAlignedBox2<float> & box );
+template Wml::Vector2<double> Center( const Wml::AxisAlignedBox2<double> & box );
+
+template void Union(  Wml::AxisAlignedBox3<float> & dest, const Wml::AxisAlignedBox3<float> & with );
+template void Union(  Wml::AxisAlignedBox3<double> & dest, const Wml::AxisAlignedBox3<double> & with );
+template void Union(  Wml::AxisAlignedBox3<float> & dest, const Wml::Vector3<float> & with );
+template void Union(  Wml::AxisAlignedBox3<double> & dest, const Wml::Vector3<double> & with );
+
+template void Union(  Wml::AxisAlignedBox2<float> & dest, const Wml::AxisAlignedBox2<float> & with );
+template void Union(  Wml::AxisAlignedBox2<double> & dest, const Wml::AxisAlignedBox2<double> & with );
+template void Union(  Wml::AxisAlignedBox2<float> & dest, const Wml::Vector2<float> & with );
+template void Union(  Wml::AxisAlignedBox2<double> & dest, const Wml::Vector2<double> & with );
+
+
+template void FitAABox( const Wml::Vector3<float> & vCenter, float fRadius, Wml::AxisAlignedBox3<float> & aaBox );
+template void FitAABox( const Wml::Vector3<double> & vCenter, double fRadius, Wml::AxisAlignedBox3<double> & aaBox );
+
+template float MaxDimension( const Wml::AxisAlignedBox3<float> & box );
+template double MaxDimension( const Wml::AxisAlignedBox3<double> & box );
+template float MinDimension( const Wml::AxisAlignedBox3<float> & box );
+template double MinDimension( const Wml::AxisAlignedBox3<double> & box );
+
+template float GetDimension( const Wml::AxisAlignedBox3<float> & box, int nDimension );
+template double GetDimension( const Wml::AxisAlignedBox3<double> & box, int nDimension );
+
+template float GetDimension( const Wml::AxisAlignedBox2<float> & box, int nDimension );
+template double GetDimension( const Wml::AxisAlignedBox2<double> & box, int nDimension );
+
+template void Translate( Wml::AxisAlignedBox2<float> & box, float fX, float fY, bool bRelative );
+template void Translate( Wml::AxisAlignedBox2<double> & box, double fX, double fY, bool bRelative );
+
+template float Clamp( const float & fValue, const float & fMin, const float & fMax );
+template double Clamp( const double & fValue, const double & fMin, const double & fMax );
+
+
+template Wml::Vector2<float> Normalize( const Wml::Vector2<float> & v );
+template Wml::Vector2<double> Normalize( const Wml::Vector2<double> & v );
+template Wml::Vector3<float> Normalize( const Wml::Vector3<float> & v );
+template Wml::Vector3<double> Normalize( const Wml::Vector3<double> & v );
+
+template Wml::Vector3<float> NCross( const Wml::Vector3<float> & v1, const Wml::Vector3<float> & v2 );
+template Wml::Vector3<double> NCross( const Wml::Vector3<double> & v1, const Wml::Vector3<double> & v2 );
+
+
+template float VectorAngle( const Wml::Vector2<float> & v1, const Wml::Vector2<float> & v2 );
+template double VectorAngle( const Wml::Vector2<double> & v1, const Wml::Vector2<double> & v2 );
+template float VectorAngle( const Wml::Vector3<float> & v1, const Wml::Vector3<float> & v2 );
+template double VectorAngle( const Wml::Vector3<double> & v1, const Wml::Vector3<double> & v2 );
+
+template float VectorCot( const Wml::Vector3<float> & v1, const Wml::Vector3<float> & v2 );
+template double VectorCot( const Wml::Vector3<double> & v1, const Wml::Vector3<double> & v2 );
+
+}
+
+#endif
+
+
+
+
+namespace rms {
 
 template Wml::Vector2<float> ToUV( const Wml::Vector3<float> & vec, int nUIndex, int nVIndex );
 template Wml::Vector2<double> ToUV( const Wml::Vector3<double> & vec, int nUIndex, int nVIndex );

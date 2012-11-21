@@ -8,7 +8,7 @@
 #include <IMesh.h>
 #include <VFTriangleMesh.h>
 #include <IterativeAlgorithm.h>
-
+#include "rmsprofile.h"
 #include <set>
 
 namespace rms {

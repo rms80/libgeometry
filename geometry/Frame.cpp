@@ -96,7 +96,7 @@ void Frame3<Real>::ComputeAlignmentMatrix( const Frame3<Real> & toFrame, Wml::Ma
 
 
 template <class Real>
-void Frame3<Real>::ReNormalize(int nPreserveAxis = -1)
+void Frame3<Real>::ReNormalize(int nPreserveAxis)
 {
 	Wml::Vector3<Real> rowX(m_matFrameInverse.GetRow(0));
 	Wml::Vector3<Real> rowY(m_matFrameInverse.GetRow(1));

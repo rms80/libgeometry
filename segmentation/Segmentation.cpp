@@ -110,7 +110,7 @@ Segmentation::Segment * Segmentation::FindSegment(SegmentID sID)
 	std::set<Segment>::iterator found = m_vSegments.find(tmp);
 	if ( found == m_vSegments.end() )
 		return NULL;
-	return &(*found);
+	return const_cast<Segmentation::Segment*>(&(*found));
 }
 
 Segmentation::SegmentID Segmentation::FindSet( IMesh::TriangleID tID )
@@ -153,7 +153,7 @@ void Segmentation::SanityCheck(VFTriangleMesh & mesh)
 {
 	std::set<Segment>::iterator curt(m_vSegments.begin()), endt(m_vSegments.end());
 	while ( curt != endt ) {
-		Segment & t = *curt++;
+		Segment & t = const_cast<Segment&>(*curt++);
 
 		for ( unsigned int k = 0; k < t.vTris.size(); ++k )
 			if ( ! mesh.IsTriangle( t.vTris[k] ) )

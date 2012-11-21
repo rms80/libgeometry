@@ -43,7 +43,7 @@ void MeshVFunctionf::ConstrainValue( IMesh::VertexID vID, float * pValue, unsign
 			c.vValue.push_back( pValue[k] );
 		m_vConstraints.insert(c);
 	} else {
-		Constraint & f = *found;
+		Constraint & f = const_cast<Constraint&>(*found);
 		for ( unsigned int k = 0; k < nValueSize; ++k )
 			f.vValue[k] = pValue[k];	
 	}
@@ -94,10 +94,10 @@ bool MeshVFunctionf::SolveDirichlet(  )
 			for ( unsigned int k = 0; k < nRHS; ++k )
 				pSolver->SetRHS(i, 0, k);
 		} else {
-			Constraint & c = *found;
+			// Constraint & c = *found;
 			pSolver->Set(i, i, 1.0f);
 			for ( unsigned int k = 0; k < nRHS; ++k )
-				pSolver->SetRHS(i, c.vValue[k], k );
+				pSolver->SetRHS(i, found->vValue[k], k );
 		}
 	}
 

@@ -14,6 +14,7 @@
 namespace rms {
 
 
+
 template<class Type>
 class ParticleGrid
 {
@@ -29,6 +30,23 @@ public:
 	void Clear();
 
 
+	struct VoxelKey {
+		int x;
+		int y;
+		int z;
+
+		bool operator<( const VoxelKey & voxel2 ) const {
+			return x < voxel2.x || x == voxel2.x && (y < voxel2.y || y == voxel2.y && (z < voxel2.z));
+		}
+	};
+
+	struct Voxel {
+		VoxelKey key;
+		std::vector<Type> particles;
+	};
+
+
+
 	class BoxIterator {
 	public:
 		BoxIterator( ParticleGrid * pGrid, const float * vPosition, float fRadius );
@@ -39,6 +57,7 @@ public:
 		Type & operator *() 
 			{ return m_pCurVoxel->particles[m_nVoxelCur]; }
 		void operator++();
+
 		void operator++(int nPostfix) { this->operator++(); }
 		bool operator==( const BoxIterator & p2 ) const 
 			{ return m_nCur == p2.m_nCur && m_nVoxelCur == p2.m_nVoxelCur; }
@@ -62,22 +81,11 @@ protected:
 	float m_vOrigin[3];
 	float m_fCellSize;
 
-	struct VoxelKey {
-		int x;
-		int y;
-		int z;
 
-		bool operator<( const VoxelKey & voxel2 ) const {
-			return x < voxel2.x || x == voxel2.x && (y < voxel2.y || y == voxel2.y && (z < voxel2.z));
-		}
-	};
 
 	void GetKey( float fX, float fY, float fZ, VoxelKey & key );
 
-	struct Voxel {
-		VoxelKey key;
-		std::vector<Type> particles;
-	};
+
 
 	unsigned int m_nMaxParticleCount;
 
@@ -136,9 +144,13 @@ typename ParticleGrid<Type>::Voxel * ParticleGrid<Type>::GetVoxel( float fX, flo
 }
 
 template<class Type>
-typename ParticleGrid<Type>::Voxel *  ParticleGrid<Type>::GetVoxel( typename const ParticleGrid<Type>::VoxelKey & key, bool bCreate )
+typename ParticleGrid<Type>::Voxel *  ParticleGrid<Type>::GetVoxel(const typename  ParticleGrid<Type>::VoxelKey & key, bool bCreate )
 {
-	VoxelMap::iterator found( m_voxels.find(key) );
+	typename VoxelMap::iterator found( m_voxels.find(key) );
+	
+	// std::map<VoxelKey, Voxel *>::iterator found = m_voxels.find(key);
+	// std::map<VoxelKey, Voxel *>::iterator found; // = m_voxels.find(key);
+	
 	if ( found != m_voxels.end() ) {
 		return (*found).second;
 	} else if ( bCreate ) {

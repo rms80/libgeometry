@@ -51,17 +51,19 @@ public:
 		for ( unsigned int k = 0; k < count; ++k ) m_vBits[k] = ! m_vBits[k];
 	}
 
-	inline void or( BitSet & set2 ) {
+
+// function was renames, "or" is reserved
+	inline void or_( BitSet & set2 ) {
 		size_t nMin = std::min(size(), set2.size());
 		for ( unsigned int k = 0; k < nMin; ++k )
 			m_vBits[k] = m_vBits[k] || set2.m_vBits[k];
 	}
-	inline void and( BitSet & set2 ) {
+	inline void and_( BitSet & set2 ) {
 		size_t nMin = std::min(size(), set2.size());
 		for ( unsigned int k = 0; k < nMin; ++k )
 			m_vBits[k] = m_vBits[k] && set2.m_vBits[k];
 	}
-	inline void xor( BitSet & set2 ) {
+	inline void xor_( BitSet & set2 ) {
 		size_t nMin = std::min(size(), set2.size());
 		for ( unsigned int k = 0; k < nMin; ++k )
 			m_vBits[k] = m_vBits[k] != set2.m_vBits[k];

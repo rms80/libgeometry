@@ -121,7 +121,7 @@ public:
 		{ m_pParticle = pParticle; }
 	ParticleQueueWrapper( float fSearchDistance )
 		{ m_pParticle = NULL; m_fSearchDistance = fSearchDistance; }
-	ExpMapParticle * Particle() { return m_pParticle; }
+	ExpMapParticle * Particle() const { return m_pParticle; }
 	float QueueValue() const 
 		{ if ( m_pParticle == NULL ) return m_fSearchDistance; else return m_pParticle->SurfaceDistance(); }
 	bool operator<( const ParticleQueueWrapper & pParticle2 ) const

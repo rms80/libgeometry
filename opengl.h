@@ -8,7 +8,12 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 #else
-#error TODO
+
+  #include <GL/gl.h>
+  #include <GL/glu.h>
+  #include <GL/glut.h>
+
+// #error TODO
 #endif
 
 

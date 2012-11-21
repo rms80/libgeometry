@@ -248,7 +248,7 @@ bool LinearComplex2<Real>::Decompose( PolygonSet2<Real> & loopSet, bool bSimplif
 
 			if ( vi != 2 ) {		// vertex with connectivity > 2. We're hosed...
 				bStuck = true;
-//				_RMSInfo("Connectivity error in GetLoops!\n");
+                                _RMSInfo("Connectivity error in GetLoops!\n");
 				continue;
 			}
 

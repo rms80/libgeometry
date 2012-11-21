@@ -2,7 +2,7 @@
 // Distributed under the Boost Software License, Version 1.0.
 // (See copy at http://www.boost.org/LICENSE_1_0.txt)
 
-#include ".\triangulator2d.h"
+#include "Triangulator2D.h"
 
 using namespace rms;
 
@@ -12781,7 +12781,11 @@ char *polyfilename;
       printf("Recovering segments in Delaunay triangulation.\n");
     }
 #ifdef TRILIBRARY
+#ifdef WIN_32
     strcpy_s(polyfilename, 6, "input");
+#else
+    strncpy(polyfilename, "input",6);
+#endif
     m->insegments = numberofsegments;
     segmentmarkers = segmentmarkerlist != (int *) NULL;
     index = 0;

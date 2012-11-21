@@ -308,7 +308,7 @@ void PolyLine2<Real>::Simplify( bool bSimplifyStraightLines )
 }
 
 template <class Real>
-Real PolyLine2<Real>::SqrDistance( const Wml::Vector2<Real> & vPoint, Wml::Vector2<Real> * pNearest = NULL )
+Real PolyLine2<Real>::SqrDistance( const Wml::Vector2<Real> & vPoint, Wml::Vector2<Real> * pNearest)
 {
 	Real fMinSqrDist = std::numeric_limits<Real>::max();
 

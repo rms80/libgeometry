@@ -170,7 +170,8 @@ void SurfaceAreaSelection::TryClose()
 	if ( fDistSqr > m_fMeshSizeFactor*0.1f )
 		return;
 
-	if ( ProjectToSurface(  0.5f * (m_vPath.front().Origin() + m_vPath.back().Origin()), m_vPath.back() ) ) {
+  Wm4::Vector3f foo(0.5f * (m_vPath.front().Origin() + m_vPath.back().Origin()));
+	if ( ProjectToSurface( foo , m_vPath.back() ) ) {
 		m_bClosed = true;
 		m_vOriginalPath = m_vPath;
 

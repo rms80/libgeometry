@@ -159,6 +159,11 @@ public:
 			m_pCurrent = copy.m_pCurrent;
 			m_pLast = copy.m_pLast;
 		}
+		
+		inline item_iterator(const item_iterator & copy ) {
+			m_pCurrent = copy.m_pCurrent;
+			m_pLast = copy.m_pLast;
+		}
 
 		inline RefEntry & operator*() { 
 			return *m_pCurrent;

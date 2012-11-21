@@ -473,7 +473,8 @@ bool COILSBoundaryDeformer::Encode_Segments()
 
 		std::set<BoundaryVert>::iterator curv(layer.vBoundaryVerts.begin()), endv(layer.vBoundaryVerts.end());
 		while ( curv != endv )
-			layer.vBoundaryVertsVec.push_back( & (*curv++) );
+
+		layer.vBoundaryVertsVec.push_back( const_cast<BoundaryVert*>(&(*curv++))); // :)
 
 		_RMSInfo("    Encoding layer %d with mode %d\n", i, layer.eEncodeMode);
 																						_RMSTUNE_start(3);
@@ -483,8 +484,9 @@ bool COILSBoundaryDeformer::Encode_Segments()
 		if ( i == 0 ) {
 			curv = layer.vBoundaryVerts.begin();
 			while ( curv != endv ) {
-				BoundaryVert & bv = *curv++;
-				UpdateBoundary( bv.vID, bv.vInitial.Origin(), bv.vInitial.Z() );
+				// BoundaryVert & bv = *curv++;
+				UpdateBoundary( curv->vID, curv->vInitial.Origin(), curv->vInitial.Z() );
+				curv++;
 			}
 		}
 
@@ -662,7 +664,8 @@ bool COILSBoundaryDeformer::Encode_Layer(EncodingLayer & layer)
 		unsigned int nNum = 0;
 		std::set<Parent>::iterator curps(vParentSet.begin()), endps(vParentSet.end());
 		while ( curps != endps ) {
-			Parent & p = *curps;  ++curps;
+			Parent & p = const_cast<Parent&>(*curps);
+			++curps;
 			layer.vEncoding[vID].vParents.push_back(p);
 			++nNum;
 		}

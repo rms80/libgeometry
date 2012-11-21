@@ -51,7 +51,7 @@ void PolyLoop3<Real>::FlipOrientation()
 
 
 template <class Real>
-Real PolyLoop3<Real>::SqrDistance( const Wml::Vector3<Real> & vPoint, Wml::Vector3<Real> * pNearest = NULL )
+Real PolyLoop3<Real>::SqrDistance( const Wml::Vector3<Real> & vPoint, Wml::Vector3<Real> * pNearest)
 {
 	Real fMinSqrDist = std::numeric_limits<Real>::max();
 

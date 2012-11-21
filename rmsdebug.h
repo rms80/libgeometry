@@ -17,13 +17,14 @@ using namespace std;
 #include <stdarg.h>
 
 
+
 static int _RMSInfo(const char * str, ...)
 {	
 	static char buf[1024];
 	va_list args;
 
 	va_start(args, str);
-	vsprintf_s(buf, 1024, str, args);
+	//vsprintf_s(buf, 1024, str, args);
 #ifdef _WIN32
 	OutputDebugString(buf);
 #else
@@ -40,7 +41,7 @@ static string _RMSInfoString(char * str, ...)
 	va_list args;
 
 	va_start(args, str);
-	vsprintf_s(buf, 1024, str, args);
+//vsprintf_s(buf, 1024, str, args);
 	va_end(args);
 	return string(buf);
 }

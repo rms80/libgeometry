@@ -7,7 +7,7 @@
 #include <fstream>
 #include <strstream>
 #include <functional>
-#include <Meshutils.h>
+#include "mesh_processing/MeshUtils.h"
 
 using namespace rms;
 

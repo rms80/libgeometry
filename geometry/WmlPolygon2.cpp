@@ -105,7 +105,7 @@ bool Polygon2<Real>::IsInside( const Wml::Vector2<Real> & vTest ) const
 
 
 template <class Real>
-Real Polygon2<Real>::SqrDistance( const Wml::Vector2<Real> & vPoint, Wml::Vector2<Real> * pNearest = NULL )
+Real Polygon2<Real>::SqrDistance( const Wml::Vector2<Real> & vPoint, Wml::Vector2<Real> * pNearest)
 {
 	Real fMinSqrDist = std::numeric_limits<Real>::max();
 

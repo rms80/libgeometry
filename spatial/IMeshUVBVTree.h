@@ -9,6 +9,7 @@
 #include <IMesh.h>
 #include <Wm4AxisAlignedBox2.h>
 #include <MemoryPool.h>
+#include "rmsprofile.h"
 
 namespace rms {
 

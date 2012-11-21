@@ -9,8 +9,13 @@
 //#define _DEBUG
 //#endif
 
+#ifdef WIN32
 #include <windows.h>
 #include <crtdbg.h>
+#endif
+
+#include <cstdlib>
+
 #include <stdio.h>
 
 void lgBreakToDebugger()
@@ -37,7 +42,7 @@ int lgAssertReport(const char * filename, int line, const char * message)
 		return 1;
 	#endif
 #else
-	fprintf(sdtderr, "lgASSERT FAILED - [%s:%d] - %s\n", filename, line, message);
+        fprintf(stderr, "lgASSERT FAILED - [%s:%d] - %s\n", filename, line, message);
 	lgBreakToDebugger();
 	return 1;	// [RMS] is this right?
 #endif

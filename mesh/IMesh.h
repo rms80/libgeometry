@@ -360,8 +360,8 @@ public:
 	IVertexFunction(rms::IMesh * pMesh)
 		{ m_pMesh = pMesh; }
 
-	rms::IMesh * Mesh() { return pMesh; }
-	const rms::IMesh * Mesh() const { return pMesh; }
+	rms::IMesh * Mesh() { return m_pMesh; }
+	const rms::IMesh * Mesh() const { return m_pMesh; }
 	
 	virtual unsigned int Components() const = 0;
 	virtual Real operator()(unsigned int vID, int nComponent) const = 0;
@@ -373,12 +373,12 @@ protected:
 typedef IVertexFunction<float> IVertexFunctionf;
 typedef IVertexFunction<double> IVertexFunctiond;
 
-
+/*
 template<class Real>
 class VertexFunction1 : public IVertexFunction<Real>, public std::vector<Real>
 {
 public:
-	VertexFunction1(rms::IMesh * pMesh) : IVertexFunction(pMesh)
+	VertexFunction1(rms::IMesh * pMesh) : IVertexFunction<Real>(pMesh)
 		{ resize(pMesh->GetMaxVertexID()); }
 
 	virtual unsigned int Components() const 
@@ -390,13 +390,13 @@ public:
 };
 typedef VertexFunction1<float> VertexFunction1f;
 typedef VertexFunction1<double> VertexFunction1d;
-
+*/
 
 template<class Real, int N>
 class VertexFunction : public IVertexFunction<Real>
 {
 public:
-	VertexFunction(rms::IMesh * pMesh) : IVertexFunction(pMesh) 
+	VertexFunction(rms::IMesh * pMesh) : IVertexFunction<Real>(pMesh) 
 		{ m_vValues.resize(pMesh->GetMaxVertexID()); }
  
 	virtual unsigned int Components() const 
@@ -423,8 +423,8 @@ public:
 	ITriangleFunction(rms::IMesh * pMesh)
 		{ m_pMesh = pMesh; }
 
-	rms::IMesh * Mesh() { return pMesh; }
-	const rms::IMesh * Mesh() const { return pMesh; }
+	rms::IMesh * Mesh() { return m_pMesh; }
+	const rms::IMesh * Mesh() const { return m_pMesh; }
 	
 	virtual unsigned int Components() const = 0;
 	virtual Real operator()(unsigned int vID, int nComponent) const = 0;
@@ -441,8 +441,8 @@ template<class Real>
 class TriangleFunction1 : public ITriangleFunction<Real>, public std::vector<Real>
 {
 public:
-	TriangleFunction1(rms::IMesh * pMesh) : ITriangleFunction(pMesh)
-		{ if ( m_pMesh ) resize(m_pMesh->GetMaxTriangleID()); }
+	TriangleFunction1(rms::IMesh * pMesh) : ITriangleFunction<Real>(pMesh)
+		{ if ( ITriangleFunction<Real>::m_pMesh ) resize(ITriangleFunction<Real>::m_pMesh->GetMaxTriangleID()); }
 
 	virtual unsigned int Components() const 
 		{ return 1; }
@@ -459,8 +459,8 @@ template<class Real, int N>
 class TriangleFunction : public ITriangleFunction<Real>
 {
 public:
-	TriangleFunction(rms::IMesh * pMesh) : ITriangleFunction(pMesh) 
-		{ if ( m_pMesh ) resize(m_pMesh->GetMaxTriangleID()); }
+	TriangleFunction(rms::IMesh * pMesh) : ITriangleFunction<Real>(pMesh) 
+		{ if ( ITriangleFunction<Real>::m_pMesh ) resize(ITriangleFunction<Real>::m_pMesh->GetMaxTriangleID()); }
  
 	virtual unsigned int Components() const 
 		{ return N; }

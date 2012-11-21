@@ -4,6 +4,7 @@
 #ifndef _RMS_DYNAMIC_VECTOR_H
 #define _RMS_DYNAMIC_VECTOR_H
 
+#include <cstddef> // 'size_t'
 #include "config.h"
 #include <vector>
 
@@ -105,7 +106,11 @@ const DynamicVector<Type> & DynamicVector<Type>::operator=( const DynamicVector 
 	// copy segment contents
 	size_t nSegs = copy.m_vSegments.size();
 	for ( unsigned int k = 0; k < nSegs; ++k ) {
-		memcpy_s( m_vSegments[k].pData, m_nSegmentSize*sizeof(Type), copy.m_vSegments[k].pData, m_nSegmentSize*sizeof(Type) );
+    #ifdef WIN32	
+		  memcpy_s( m_vSegments[k].pData, m_nSegmentSize*sizeof(Type), copy.m_vSegments[k].pData, m_nSegmentSize*sizeof(Type) );
+		#else
+		  memcpy( m_vSegments[k].pData, copy.m_vSegments[k].pData, m_nSegmentSize*sizeof(Type) );
+		#endif
 		m_vSegments[k].nSize = m_nSegmentSize;
 		m_vSegments[k].nCur = copy.m_vSegments[k].nCur;
 	}

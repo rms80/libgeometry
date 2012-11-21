@@ -639,7 +639,13 @@ rinse_and_repeat:
 	}
 
 	std::sort( vNeighbours.begin(), vNeighbours.end(), ParticleDistanceSort );
-	unsigned int nMaxNbrs = (unsigned int)std::min(sMaxNbrs, nFoundNbrs );
+	unsigned int nMaxNbrs;
+
+	if (sMaxNbrs < nFoundNbrs)
+	  nMaxNbrs = (unsigned int)sMaxNbrs;
+	else
+	  nMaxNbrs = (unsigned int)nFoundNbrs;
+	// = (unsigned int)std::min(sMaxNbrs, nFoundNbrs );
 	for ( unsigned int k = 0; k < nFoundNbrs; ++k )
 		vNeighbours[k]->SurfaceDistance() = std::numeric_limits<float>::max();
 
@@ -820,7 +826,7 @@ void ExpMapGenerator::ComputeExpMap( float fStopDistance, unsigned int nMaxCount
 
 	// run until pq is empty
 	float fStopDistSquare = fStopDistance / (float)sqrt(2.0f);
-	float fCurMaxGeoDist = 0;
+	// float fCurMaxGeoDist = 0;
 	unsigned int nTouched = 0;
 	while ( ! pq.empty() ) {
 
@@ -828,6 +834,8 @@ void ExpMapGenerator::ComputeExpMap( float fStopDistance, unsigned int nMaxCount
 			break;
 
 		// pop front	
+		// ExpMapParticle * pFront = pq.begin()->Particle();
+
 		ExpMapParticle * pFront = pq.begin()->Particle();
 		pq.erase( pq.begin() );
 

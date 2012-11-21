@@ -11,6 +11,7 @@
 
 #include "IMesh.h"
 #include "MemoryPool.h"
+#include "rmsprofile.h"
 
 
 
