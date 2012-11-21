@@ -3,7 +3,7 @@ cd LibFoundation
 make -f makefile.wm4 CFG=Release SYS=linux GRF=OpenGL
 
 # to compile a demo program, go into Testing and change the GSI_FOLDER/GEO_FOLDER-variables
-to fit to your installation. You might also need to change the path to Eigen.
+to fit to your installation. 
 then simple
 cmake .. && make && ./foo
 will compile and start the demo
