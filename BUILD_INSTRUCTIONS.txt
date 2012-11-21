@@ -1,0 +1,11 @@
+Building:
+
+1) Make sure you have Visual Studio 2008 SP1 installed
+2) run WildMagic4\autobuild_vs2008_x64.bat
+    (or autobuild_vs2008.bat if you have a 32-bit machine)
+3) open and build libgeometry_vc9.sln
+
+The static libraries will be stored in lib\, and the headers in include\
+
+For more information:
+http://www.dgp.toronto.edu/~rms/software/DragDropTool/index.html

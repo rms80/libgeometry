@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libgeometry", "libgeometry_vc9.vcproj", "{9D37DA45-3740-46A4-B371-2BFF87B350D9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9CE08AA4-9163-4A42-BCBF-E361B5BA5BC0} = {9CE08AA4-9163-4A42-BCBF-E361B5BA5BC0}
+	EndProjectSection
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibFoundation_VC90", "WildMagic4\LibFoundation\LibFoundation_VC90.vcproj", "{9CE08AA4-9163-4A42-BCBF-E361B5BA5BC0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9D37DA45-3740-46A4-B371-2BFF87B350D9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9D37DA45-3740-46A4-B371-2BFF87B350D9}.Debug|Win32.Build.0 = Debug|Win32
+		{9D37DA45-3740-46A4-B371-2BFF87B350D9}.Release|Win32.ActiveCfg = Release|Win32
+		{9D37DA45-3740-46A4-B371-2BFF87B350D9}.Release|Win32.Build.0 = Release|Win32
+		{9CE08AA4-9163-4A42-BCBF-E361B5BA5BC0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9CE08AA4-9163-4A42-BCBF-E361B5BA5BC0}.Release|Win32.ActiveCfg = ReleaseMD|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
