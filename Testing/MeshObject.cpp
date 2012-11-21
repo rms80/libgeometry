@@ -56,11 +56,8 @@ void MeshObject::ReadMeshOBJ( const char * pFilename )
 		fprintf(stderr, "Error opening file %s:\n%s\n", pFilename, err.c_str() );
 		exit(-1);
 	}
-// printf("0 \n");
   readMesh.ClipEarTriangles();
- // printf("1 \n");
   SetMesh(readMesh);
- // printf("2 \n");
 }
 
 void MeshObject::SetMesh( rms::VFTriangleMesh & mesh )

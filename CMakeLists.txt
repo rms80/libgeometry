@@ -17,6 +17,7 @@ include_directories(external/eigen)
 add_definitions(-DEIGEN_YES_I_KNOW_SPARSE_MODULE_IS_NOT_STABLE_YET)
 
 find_package(OpenGL REQUIRED)
+find_package(GLUT REQUIRED)
 
 
 include_directories(parameterization )
@@ -45,6 +46,7 @@ file(GLOB mesh_src
     MeshObject.cpp
     Texture.cpp
     config.cpp
+    ExtendedWmlCamera.cpp
 )
 
 
@@ -60,10 +62,13 @@ MESSAGE(STATUS "Mesh: " ${mesh_src} )
 
 Message(STATUS "CMAKE_TARGET_DEFINITIONS: ${CMAKE_TARGET_DEFINITIONS}")
 Message(STATUS "OpenGl-lib: ${OPENGL_LIBRARIES}")
+Message(STATUS "Glut-lib: ${GLUT_LIBRARIES}")
 
 
-add_executable (foo test.cpp ${mesh_src})
-TARGET_LINK_LIBRARIES(foo ${OPENGL_LIBRARIES} ${GEO_FOLDER}/WildMagic4/SDK/Library/Release/libWm4Foundation.a)
+# add_executable (foo test.cpp ${mesh_src})
+add_executable (foo expmapCL.cpp ${mesh_src})
+
+TARGET_LINK_LIBRARIES(foo ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${GEO_FOLDER}/WildMagic4/SDK/Library/Release/libWm4Foundation.a)
  
 TARGET_LINK_LIBRARIES(foo ${GSI_FOLDER}/build/libgsi.a)
 TARGET_LINK_LIBRARIES(foo ${GSI_FOLDER}/packages/taucs_full/lib/linux64/libtaucs.a)
