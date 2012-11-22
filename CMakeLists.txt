@@ -9,7 +9,6 @@ set(CMAKE_CXX_COMPILER "/usr/bin/clang")
 
 set(GSI_FOLDER "/work/home/engelhan/code/GSI")
 set(GEO_FOLDER "/work/home/engelhan/code/libgeometry")
-#include_directories(/usr/include/eigen3/) # replace by find_package
 include_directories(external/eigen)
 
 
