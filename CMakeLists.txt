@@ -67,6 +67,8 @@ Message(STATUS "Glut-lib: ${GLUT_LIBRARIES}")
 # add_executable (foo test.cpp ${mesh_src})
 add_executable (foo expmapCL.cpp ${mesh_src})
 
+add_library(libgeometry ${mesh_src})
+
 TARGET_LINK_LIBRARIES(foo ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} ${GEO_FOLDER}/WildMagic4/SDK/Library/Release/libWm4Foundation.a)
  
 TARGET_LINK_LIBRARIES(foo ${GSI_FOLDER}/build/libgsi.a)
