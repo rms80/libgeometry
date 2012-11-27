@@ -4,7 +4,7 @@
 
 #include "ExpMapGenerator.h"
 #include "rmsprofile.h"
-
+#include "rmsdebug.h"
 #include <limits>
 #include <list>
 #include <set>
@@ -808,7 +808,7 @@ void ExpMapGenerator::SetSurfaceDistances( const Frame3f & vSeedFrame, float fNe
 	ComputeExpMap( fStopDistance, nMaxCount );
 
 	_RMSTUNE_end(4);
-//	_RMSInfo("Total time was %f\n", _RMSTUNE_time(4) );
+	//_RMSInfo("Total time was %f\n", _RMSTUNE_time(4) );
 }
 
 

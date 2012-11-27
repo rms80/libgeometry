@@ -193,6 +193,10 @@ void MeshObject::RotateExpMap( float fRotate )
 
 bool MeshObject::ValidateExpMap(bool bForce)
 {
+
+//  std::cout << "vla" << std::endl;
+//  printf("validating expmap");
+
 	if ( ! bForce ) {
 		if ( ! m_bComputeExpMap )
 			return false;
@@ -211,6 +215,7 @@ bool MeshObject::ValidateExpMap(bool bForce)
 	//if ( g_bUseClipPoly )
 	//	m_expmapgen.SetClipPoly( g_ClipPoly );
 
+	std::cout << "validating: radius: " << fParamRadius << std::endl;
 	m_expmapgen.SetSurfaceDistances(m_vSeedFrame.Origin(), 0.0f, 
 		fParamRadius, &m_vSeedFrame);
 	m_expmapgen.CopyVertexUVs(&m_mesh, 0);

@@ -341,7 +341,10 @@ inline void VFTriangleMesh::SetNormal( VertexID vID, const Wml::Vector3f & vNorm
 
 inline void VFTriangleMesh::GetVertex( IMesh::VertexID vID, Wml::Vector3f & vVertex, Wml::Vector3f * pNormal ) const 
 { 
-  assert(m_vVertices.isValid(vID));
+  if (!m_vVertices.isValid(vID)){
+    std::cout << vID << " is not a valid vertex id" << std::endl;
+    assert(false); 
+  }
   const Vertex & v = m_vVertices[vID];
   vVertex = v.vVertex;
   if ( pNormal )

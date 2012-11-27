@@ -15,6 +15,7 @@ using namespace std;
 
 #include <stdio.h>
 #include <stdarg.h>
+#include <cstdio>
 
 
 
@@ -24,10 +25,12 @@ static int _RMSInfo(const char * str, ...)
 	va_list args;
 
 	va_start(args, str);
-	//vsprintf_s(buf, 1024, str, args);
+	//
 #ifdef _WIN32
+	vsprintf_s(buf, 1024, str, args);
 	OutputDebugString(buf);
 #else
+	vsprintf(buf, str, args);
 	fprintf(stderr, "%s", buf);
 #endif
 	va_end(args);
@@ -42,6 +45,11 @@ static string _RMSInfoString(char * str, ...)
 
 	va_start(args, str);
 //vsprintf_s(buf, 1024, str, args);
+#ifdef _WIN32
+	vsprintf_s(buf, 1024, str, args);
+#else
+	vsprintf(buf, str, args);
+#endif
 	va_end(args);
 	return string(buf);
 }

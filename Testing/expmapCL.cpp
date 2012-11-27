@@ -130,7 +130,12 @@ void glut_initgl()
 void glut_main_display(void)
 {
 	// make sure expmap is computed
+
+  _RMSTUNE_start(0);
 	g_mesh.ValidateExpMap();
+_RMSTUNE_end(0);
+_RMSTUNE_Print_Time("califate",0);
+
 
 	// clear window
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
